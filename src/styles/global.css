@@ -93,24 +93,13 @@ h1 { font-size: clamp(3.5rem, 6.5vw, 5.5rem); line-height: 1.03; font-weight: 85
 .join-panel h2 { font-size: clamp(1.9rem, 3vw, 2.55rem); }
 .join-copy > p:not(.eyebrow) { font-size: 1rem; color: #c3ccdf; line-height: 1.9; margin-bottom: 27px; }
 .join-note { display: block; font-size: .69rem; color: #b3c1d9; margin-top: 15px; }
-.contact h2 { font-size: 2rem; }
-.contact-grid { display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 45px; margin-top: 36px; }
-.contact-label { display: flex; gap: 8px; align-items: center; color: #667187; font-size: .73rem; margin-bottom: 16px; }
-.contact-grid strong, .email-link { font-size: .9rem; font-weight: 750; }
-.contact-grid p { color: #667187; font-size: 1rem; margin: 5px 0 0; }
-.email-link { text-decoration: underline; text-decoration-color: #b2dce7; text-underline-offset: 6px; overflow-wrap: anywhere; }
-.email-link:hover { color: #087b99; }
-.footer { border-top: 1px solid #e2e8ef; padding-block: 25px; }
-.footer-inner { display: flex; gap: 30px; align-items: center; font-size: .7rem; color: #667187; }
-.footer-inner a { color: #192b55; font-weight: 800; margin-right: auto; }
-.footer-inner p { margin: 0; }
 @media (min-width: 768px) and (prefers-reduced-motion: no-preference) { .hero-copy { animation: enter .65s ease-out both; }  @keyframes enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } } }
 @media (max-width: 1050px) {
   .container { width: calc(100% - 64px); }
   .header-inner { gap: 25px; } .desktop-nav { gap: 18px; }
   .hero-main { gap: 15px; } .badge-orbit { width: 290px; height: 290px; } .badge-orbit img { width: 240px; }
   .about-grid { gap: 50px; } .activity-grid { grid-template-columns: repeat(2, 1fr); }
-  .join-panel { padding: 45px; } .contact-grid { gap: 25px; }
+  .join-panel { padding: 45px; }
 }
 @media (max-width: 767px) {
   .container { width: calc(100% - 40px); } .section { padding-block: 65px; }
@@ -134,8 +123,6 @@ h1 { font-size: clamp(3.5rem, 6.5vw, 5.5rem); line-height: 1.03; font-weight: 85
   .activity-grid { gap: 14px; } .activity-card { padding: 24px 20px; }
   .gallery-empty { padding: 30px 22px; } .gallery-grid { grid-template-columns: 1fr 1fr; }
   .join-panel { padding: 34px 26px; border-radius: 10px; }
-  .contact-grid { grid-template-columns: 1fr; gap: 29px; } .contact-label { margin-bottom: 9px; }
-  .footer-inner { flex-wrap: wrap; gap: 8px 20px; } .footer-inner a { width: calc(100% - 60px); margin: 0; order: 0; } .footer-inner span { order: 1; } .footer-inner p { order: 2; width: 100%; }
 }
 @media (max-width: 420px) { .activity-grid, .gallery-grid { grid-template-columns: 1fr; } .activity-card { padding: 26px; } .hero-bottom-inner { flex-direction: column; gap: 3px; } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
@@ -146,17 +133,9 @@ h1 { font-size: clamp(3.5rem, 6.5vw, 5.5rem); line-height: 1.03; font-weight: 85
 .hero-bottom .social-links a { color: #e0e8f5; }
 .hero-bottom .social-links a:hover { color: #6bd4ed; }
 @media (max-width: 420px) { .hero-bottom-inner { align-items: flex-start; } }
-.visiting-address { font-style: normal; color: #667187; font-size: 1rem; margin-top: 5px; }
 .social-icons { gap: 12px; }
 .social-icons a { width: 46px; height: 46px; justify-content: center; border: 1px solid #dce4ee; border-radius: 50%; background: #f4f7fa; }
 .social-icons a:hover { background: #e6f7fb; border-color: #1cb5d9; }
-.billing { padding-block: 12px 32px; margin-bottom: 24px; border-bottom: 1px solid #e2e8ef; }
-.billing h2 { font-size: 1rem; letter-spacing: -.02em; margin-bottom: 20px; }
-.billing-grid { display: grid; grid-template-columns: 1.2fr 1fr auto; gap: 35px; color: #58647b; font-size: .875rem; }
-.billing-grid p { margin: 0; }
-.billing-grid address { font-style: normal; }
-.billing-name { max-width: 390px; }
-@media (max-width: 767px) { .billing-grid { grid-template-columns: 1fr; gap: 18px; } }
 /* The hero is split equally between copy and edge-to-edge imagery. */
 .hero-main { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0; padding: 0; align-items: stretch; }
 .hero-copy { padding: 82px 48px 82px max(48px, calc((100vw - 1180px) / 2)); min-width: 0; align-self: center; }

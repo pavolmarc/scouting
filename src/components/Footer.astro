@@ -5,35 +5,172 @@ import { site, socialLinks } from '../data/site';
 import Icon from './Icon.astro';
 import SocialLinks from './SocialLinks.astro';
 ---
-<section id="kontakt" class="section contact" aria-labelledby="contact-title"><div class="container">
-  {site.contact.label && <p class="eyebrow">{site.contact.label}</p>}<h2 id="contact-title">{site.contact.title}</h2>
-  <div class="contact-grid"><div><span class="contact-label"><Icon name="pin" size={19}/>{site.contact.locationLabel}</span><strong>{site.name}</strong><address class="visiting-address">{site.visitingAddress}</address></div><div><span class="contact-label"><Icon name="mail" size={19}/>{site.contact.emailLabel}</span><a class="email-link" href={`mailto:${site.email}`}>{site.email}</a></div><div><span class="contact-label">{site.contact.socialLabel}</span>{socialLinks.length ? <SocialLinks iconsOnly /> : <p>{site.contact.socialEmpty}</p>}</div></div>
-</div></section>
-<footer class="footer">
-  <div class="container billing" aria-labelledby="billing-title">
-    <h2 id="billing-title">{site.billing.title}</h2>
-    <div class="billing-grid">
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <section id="kontakt" aria-labelledby="contact-title">
+      <h2 id="contact-title">{site.contact.title}</h2>
+      <div class="contact-item">
+        <h3><Icon name="pin" size={18} />{site.contact.locationLabel}</h3>
+        <p>{site.visitingAddress}</p>
+      </div>
+      <div class="contact-item">
+        <h3><Icon name="mail" size={18} />{site.contact.emailLabel}</h3>
+        <a class="email-link" href={`mailto:${site.email}`}>{site.email}</a>
+      </div>
+      {socialLinks.length > 0 && (
+        <div class="contact-item">
+          <h3>{site.contact.socialLabel}</h3>
+          <SocialLinks />
+        </div>
+      )}
+    </section>
+
+    <section class="billing-card" aria-labelledby="billing-title">
+      <h2 id="billing-title">{site.billing.title}</h2>
       <p class="billing-name">{site.billing.name}</p>
-      <address>{site.billing.street}<br />{site.billing.postalCode} {site.billing.city}</address>
-      <p><strong>IČO:</strong> {site.billing.ico}</p>
-    </div>
-    <a class="websupport-banner" href="https://www.websupport.sk/">
-      <Image src={websupportBanner} alt="Websupport – Webuj s ľahkosťou" />
-    </a>
+      <p>{site.billing.street}<br />{site.billing.postalCode} {site.billing.city}</p>
+      <dl class="billing-id">
+        <dt>IČO</dt>
+        <dd>{site.billing.ico}</dd>
+      </dl>
+    </section>
+
+    <section class="footer-banner" aria-labelledby="websupport-title">
+      <h2 id="websupport-title">Websupport</h2>
+      <a href="https://www.websupport.sk/">
+        <Image src={websupportBanner} alt="Websupport – Webuj s ľahkosťou" />
+      </a>
+    </section>
   </div>
-  <div class="container footer-inner"><a href="#uvod">{site.name}</a><p>{site.footer}</p><span>© {new Date().getFullYear()}</span></div></footer>
+
+  <div class="container footer-bottom">
+    <a href="#uvod">{site.name}</a>
+    <p>© {new Date().getFullYear()} {site.footer}</p>
+  </div>
+</footer>
 
 <style>
-  .websupport-banner {
+  .site-footer {
+    background: #f4f7fa;
+    border-top: 1px solid #dce4ee;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr) minmax(0, 1fr);
+    align-items: start;
+    gap: clamp(24px, 4vw, 56px);
+    padding-block: clamp(36px, 6vw, 72px);
+  }
+
+  h2 {
+    font-size: 1.25rem;
+    letter-spacing: -.025em;
+    margin-bottom: 18px;
+  }
+
+  .contact-item + .contact-item {
+    margin-top: 16px;
+  }
+
+  .contact-item h3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: .9375rem;
+    margin-bottom: 4px;
+  }
+
+  .contact-item p,
+  .billing-card p {
+    color: #58647b;
+    margin-bottom: 0;
+  }
+
+  .email-link {
+    font-weight: 700;
+    overflow-wrap: anywhere;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .email-link:hover {
+    color: #087b99;
+  }
+
+  .billing-card {
+    padding: 22px 24px;
+    background: white;
+    border: 1px solid #dce4ee;
+    border-radius: 12px;
+  }
+
+  .billing-card .billing-name {
+    color: inherit;
+    font-weight: 750;
+    margin-bottom: 8px;
+  }
+
+  .billing-id {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    margin: 16px 0 0;
+    padding-top: 12px;
+    border-top: 1px solid #dce4ee;
+  }
+
+  .billing-id dt {
+    font-weight: 750;
+  }
+
+  .billing-id dd {
+    margin: 0;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .footer-banner a {
     display: block;
     width: fit-content;
     max-width: 100%;
-    margin-top: 24px;
   }
 
-  .websupport-banner img {
+  .footer-banner img {
     display: block;
     max-width: 100%;
     height: auto;
+    border-radius: 6px;
+  }
+
+  .footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 4px 24px;
+    border-top: 1px solid #dce4ee;
+    padding-block: 18px;
+    font-size: .875rem;
+  }
+
+  .footer-bottom a {
+    font-weight: 800;
+  }
+
+  .footer-bottom p {
+    color: #58647b;
+    margin: 0;
+  }
+
+  @media (max-width: 960px) {
+    .footer-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .footer-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
   }
 </style>
