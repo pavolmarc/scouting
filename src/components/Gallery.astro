@@ -1,0 +1,8 @@
+---
+import { site, galleryPhotos, assetUrl } from '../data/site';
+import Icon from './Icon.astro';
+---
+<section id="galeria" class="section" aria-labelledby="gallery-title"><div class="container">
+  <div class="section-heading"><div><p class="eyebrow">{site.gallery.label}</p><h2 id="gallery-title">{site.gallery.title}</h2></div><p class="body-copy">{site.gallery.intro}</p></div>
+  {galleryPhotos.length ? <div class="gallery-grid">{galleryPhotos.map(photo => <figure><img src={assetUrl(photo.src)} alt={photo.alt} width={photo.width} height={photo.height} loading="lazy" decoding="async"/></figure>)}</div> : <div class="gallery-empty"><div class="gallery-symbol"><Icon name="photo" size={35}/></div><span class="gallery-tag">{site.gallery.emptyTag}</span><h3>{site.gallery.emptyTitle}</h3><p>{site.gallery.emptyText}</p></div>}
+</div></section>

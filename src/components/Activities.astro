@@ -1,0 +1,25 @@
+---
+import { Image } from 'astro:assets';
+import { site } from '../data/site';
+---
+<section id="co-robime" class="section activities" aria-labelledby="activities-title">
+  <div class="container"><div class="section-heading"><div><p class="eyebrow">{site.activities.label}</p><h2 id="activities-title">{site.activities.title}</h2></div><p class="body-copy">{site.activities.intro}</p></div>
+  <div class="activity-grid">
+    {site.activities.items.map((item) => (
+      <article class="activity-card">
+        <Image
+          class="activity-photo"
+          src={item.photo}
+          alt={item.alt}
+          widths={[320, 640, 960]}
+          sizes="(max-width: 420px) calc(100vw - 94px), (max-width: 767px) calc(50vw - 69px), (max-width: 1050px) calc(50vw - 92px), 240px"
+          loading="lazy"
+          decoding="async"
+        />
+        <h3>{item.title}</h3>
+        <p class="activity-tag">{item.tag}</p>
+        <p class="body-copy">{item.text}</p>
+      </article>
+    ))}
+  </div></div>
+</section>

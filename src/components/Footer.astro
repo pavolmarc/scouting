@@ -1,0 +1,19 @@
+---
+import { site, socialLinks } from '../data/site';
+import Icon from './Icon.astro';
+import SocialLinks from './SocialLinks.astro';
+---
+<section id="kontakt" class="section contact" aria-labelledby="contact-title"><div class="container">
+  {site.contact.label && <p class="eyebrow">{site.contact.label}</p>}<h2 id="contact-title">{site.contact.title}</h2>
+  <div class="contact-grid"><div><span class="contact-label"><Icon name="pin" size={19}/>{site.contact.locationLabel}</span><strong>{site.name}</strong><address class="visiting-address">{site.visitingAddress}</address></div><div><span class="contact-label"><Icon name="mail" size={19}/>{site.contact.emailLabel}</span><a class="email-link" href={`mailto:${site.email}`}>{site.email}</a></div><div><span class="contact-label">{site.contact.socialLabel}</span>{socialLinks.length ? <SocialLinks iconsOnly /> : <p>{site.contact.socialEmpty}</p>}</div></div>
+</div></section>
+<footer class="footer">
+  <div class="container billing" aria-labelledby="billing-title">
+    <h2 id="billing-title">{site.billing.title}</h2>
+    <div class="billing-grid">
+      <p class="billing-name">{site.billing.name}</p>
+      <address>{site.billing.street}<br />{site.billing.postalCode} {site.billing.city}</address>
+      <p><strong>IČO:</strong> {site.billing.ico}</p>
+    </div>
+  </div>
+  <div class="container footer-inner"><a href="#uvod">{site.name}</a><p>{site.footer}</p><span>© {new Date().getFullYear()}</span></div></footer>

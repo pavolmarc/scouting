@@ -1,0 +1,18 @@
+---
+import HeroSlideshow from './HeroSlideshow.astro';
+import { site } from '../data/site';
+import SocialLinks from './SocialLinks.astro';
+---
+<section id="uvod" class="hero" aria-labelledby="hero-title">
+  <div class="hero-main">
+    <div class="hero-copy">
+      <p class="eyebrow hero-eyebrow">{site.hero.eyebrow}</p>
+      <h1 id="hero-title"><span class="hero-name">4. zbor</span>{site.shortName}</h1>
+      <p class="hero-subtitle">{site.hero.title}</p>
+      <p class="hero-description">{site.hero.text}</p>
+      <div class="hero-actions flex flex-wrap gap-4"><a class="button button-yellow" href="#pridaj-sa">{site.hero.action}</a><a class="text-link" href="#o-nas">{site.hero.secondary}</a></div>
+    </div>
+    <HeroSlideshow />
+  </div>
+  <div class="hero-bottom"><div class="container hero-bottom-inner"><SocialLinks /></div></div>
+</section>

@@ -1,0 +1,30 @@
+---
+import badge from '../assets/domovenka.svg?url';
+import { site } from '../data/site';
+---
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="#uvod" aria-label={`${site.name} – úvod`}>
+      <img src={badge} width={47} height={47} alt="" />
+      <span><strong>{site.shortName}</strong><small>4. zbor · Slovenský skauting</small></span>
+    </a>
+    <nav class="desktop-nav" aria-label="Hlavná navigácia">
+      {site.navigation.map(item => <a href={item.href}>{item.label}</a>)}
+    </nav>
+    <a class="button button-small header-cta" href="#pridaj-sa">{site.hero.action}</a>
+    <details class="mobile-menu">
+      <summary aria-label="Otvoriť navigáciu"><span>Menu</span><span class="menu-lines" aria-hidden="true"></span></summary>
+      <nav aria-label="Mobilná navigácia">{site.navigation.map(item => <a href={item.href}>{item.label}</a>)}<a href="#pridaj-sa">{site.hero.action}</a></nav>
+    </details>
+  </div>
+</header>
+<script>
+  const menu = document.querySelector<HTMLDetailsElement>('.mobile-menu');
+  menu?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { menu.open = false; }));
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && menu?.open) { menu.open = false; menu.querySelector('summary')?.focus(); }
+  });
+  document.addEventListener('click', event => {
+    if (menu?.open && event.target instanceof Node && !menu.contains(event.target)) menu.open = false;
+  });
+</script>

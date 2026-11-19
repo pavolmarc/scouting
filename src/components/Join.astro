@@ -1,0 +1,7 @@
+---
+import { site } from '../data/site';
+import Icon from './Icon.astro';
+---
+<section id="pridaj-sa" class="join-section" aria-labelledby="join-title"><div class="container"><div class="join-panel">
+  <div class="join-copy"><p class="eyebrow">{site.join.label}</p><h2 id="join-title" class="whitespace-pre-line">{site.join.title}</h2><p>{site.join.text}</p><a class="button button-yellow" href={`mailto:${site.email}`}><Icon name="mail" size={20}/>{site.join.action}</a><span class="join-note">{site.join.note}</span></div>
+</div></div></section>

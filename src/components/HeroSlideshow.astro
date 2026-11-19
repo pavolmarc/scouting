@@ -1,0 +1,58 @@
+---
+import { Image } from 'astro:assets';
+import badge from '../assets/domovenka.svg?url';
+import { heroPhotos, heroBackdrop } from '../data/hero';
+const labels = ['Domovenka', ...heroPhotos.map((_, i) => `Fotografia ${i + 1}`)];
+---
+<section class="hero-slideshow" aria-label="Domovenka a fotografie zo života zboru" aria-roledescription="prezentácia">
+  <div class="hero-slides" id="hero-slides">
+    <div class="hero-slide badge-slide is-active" role="group" aria-roledescription="snímka" aria-label={`1 z ${labels.length}: Domovenka`} aria-hidden="false">
+      <Image class="badge-backdrop" src={heroBackdrop} alt="" widths={[600, 1200]} sizes="(max-width: 767px) 100vw, 50vw" loading="eager" aria-hidden="true" />
+      <div class="badge-orbit"><img src={badge} alt="Domovenka 4. zboru Dzive labute – labuť so skautskou ľaliou" width="320" height="320" loading="eager" fetchpriority="high" /></div>
+    </div>
+    {heroPhotos.map((photo, i) => <div class="hero-slide photo-slide" role="group" aria-roledescription="snímka" aria-label={`${i + 2} z ${labels.length}`} aria-hidden="true">
+      <Image src={photo.src} alt={photo.alt} widths={[600, 1200]} sizes="(max-width: 767px) 100vw, 50vw" loading="eager" decoding="async" />
+    </div>)}
+  </div>
+  <div class="slideshow-controls" hidden>
+    <div class="slideshow-dots" role="group" aria-label="Výber snímky">
+      {labels.map((label, i) => <button type="button" class="slide-dot" aria-label={label} aria-controls="hero-slides" aria-current={i === 0 ? 'true' : undefined} data-slide={i}><span aria-hidden="true"></span></button>)}
+    </div>
+  </div>
+</section>
+<script>
+  const carousel = document.querySelector<HTMLElement>('.hero-slideshow');
+  if (carousel) {
+    const slides = [...carousel.querySelectorAll<HTMLElement>('.hero-slide')];
+    const dots = [...carousel.querySelectorAll<HTMLButtonElement>('[data-slide]')];
+    const controls = carousel.querySelector<HTMLElement>('.slideshow-controls')!;
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let current = 0;
+    let paused = motion.matches;
+    let hovered = false;
+    let timer: ReturnType<typeof setInterval> | undefined;
+    const show = (index: number) => {
+      current = index;
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('is-active', i === current);
+        slide.setAttribute('aria-hidden', String(i !== current));
+      });
+      dots.forEach((dot, i) => i === current ? dot.setAttribute('aria-current', 'true') : dot.removeAttribute('aria-current'));
+    };
+    const sync = () => {
+      clearInterval(timer);
+      if (!paused && !hovered && !document.hidden) timer = setInterval(() => show((current + 1) % slides.length), 3000);
+    };
+    controls.hidden = false;
+    dots.forEach((dot, index) => dot.addEventListener('click', () => { paused = true; show(index); sync(); }));
+    carousel.addEventListener('mouseenter', () => { hovered = true; sync(); });
+    carousel.addEventListener('mouseleave', () => { hovered = false; sync(); });
+    // Keyboard focus stops rotation; the dots then allow manual navigation.
+    carousel.addEventListener('focusin', (event) => {
+      if (!carousel.contains(event.relatedTarget as Node | null) && event.target instanceof Element && event.target.matches(':focus-visible')) { paused = true; sync(); }
+    });
+    document.addEventListener('visibilitychange', sync);
+    motion.addEventListener('change', () => { if (motion.matches) { paused = true; sync(); } });
+    sync();
+  }
+</script>
