@@ -119,6 +119,6 @@ export const galleryPhotos: GalleryPhoto[] = [
 ];
 export const socialLinks: { label: string; url: string }[] = [
   { label: 'Facebook', url: 'https://www.facebook.com/DziveLabute/' },
-  { label: 'Instagram', url: 'https://www.instagram.com/dzive.labute/' },
+  { label: 'Instagram', url: 'https://www.instagram.com/dzive_labute/' },
 ];
 export const assetUrl = (path: string) => `${import.meta.env.BASE_URL.replace(/\/$/, '')}/${path.replace(/^\//, '')}`;
