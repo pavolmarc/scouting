@@ -1,0 +1,43 @@
+---
+import DirectPage from '../layouts/DirectPage.astro';
+import Icon from '../components/Icon.astro';
+import { assetUrl, site } from '../data/site';
+---
+<DirectPage
+  title="Vitajte u Dzivých labutí"
+  description="Pridáva sa k nám vaše dieťa? Tu nájdete prihlášku a základné informácie k prvým skautským stretnutiam."
+  label="Pre rodičov nováčikov"
+>
+  <a slot="actions" class="button button-yellow mt-6" href={assetUrl('prihlaska.pdf')} download="prihlaska.pdf">
+    Stiahnuť prihlášku (PDF)
+  </a>
+
+  <div class="onboarding">
+    <section aria-labelledby="prihlaska">
+      <h2 id="prihlaska">Ako vyplniť prihlášku</h2>
+      <p>Na prvej strane vyplňte údaje o dieťati a jeho zákonných zástupcoch. Na druhej strane označte, ktoré súhlasy udeľujete, doplňte dátum a podpíšte sa ako zákonný zástupca.</p>
+      <p>Na spôsobe odovzdania sa dohodnite s radcom, ktorý vedie družinu vášho dieťaťa. Ak kontakt ešte nemáte, napíšte nám.</p>
+    </section>
+
+    <section aria-labelledby="stretnutie">
+      <h2 id="stretnutie">Prvé družinové stretnutie</h2>
+      <p>Družinovky sú pravidelné stretnutia v menších skupinách podľa veku. Trvajú približne hodinu a pol a deti na nich cez hry a spoločné aktivity spoznávajú skauting aj svoju družinu.</p>
+      <p>Termín a miesto prvého stretnutia si dohodnite s radcom družiny.</p>
+    </section>
+  </div>
+
+  <section class="contact-card" aria-labelledby="otazky">
+    <h2 id="otazky">Máte otázky?</h2>
+    <a href={`mailto:${site.email}`}><Icon name="mail" size={20} />{site.email}</a>
+  </section>
+</DirectPage>
+
+<style>
+  .onboarding { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(24px, 5vw, 64px); }
+  h2 { font-size: clamp(1.35rem, 3vw, 1.8rem); margin-bottom: 12px; }
+  p { color: #58647b; max-width: 62ch; }
+  p + p { margin-top: 10px; }
+  .contact-card { background: #f4f7fa; border: 1px solid #dce4ee; border-radius: 12px; margin-top: 32px; padding: 22px; }
+  .contact-card a { display: inline-flex; align-items: center; gap: 8px; font-weight: 750; text-decoration: underline; overflow-wrap: anywhere; }
+  @media (max-width: 700px) { .onboarding { grid-template-columns: 1fr; } }
+</style>

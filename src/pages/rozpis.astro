@@ -1,0 +1,138 @@
+---
+import DirectPage from '../layouts/DirectPage.astro';
+import schedule from '../data/schedule.json';
+
+const days = ['Pondelok', 'Utorok', 'Streda', 'Štvrtok', 'Piatok'];
+const dayFor = (time: string) => days.find(day => time.startsWith(`${day} `)) ?? 'dohoda';
+const meetingDays = new Set(schedule.groups.map(group => dayFor(group.time)));
+const groups = [...schedule.groups].sort((first, second) => {
+  const order = [...days, 'dohoda'];
+  return order.indexOf(dayFor(first.time)) - order.indexOf(dayFor(second.time));
+});
+const phoneHref = (phone: string) => `tel:${phone.replace(/\s/g, '')}`;
+const emptyMonths = schedule.months.filter(month => !month.events.length);
+---
+<DirectPage title="Rozpis a kalendár" description="Termíny družinoviek, plánované akcie a kontakty na vedenie zboru." label={`Skautský rok ${schedule.season}`}>
+  <nav slot="actions" class="section-links" aria-label="Na tejto stránke">
+    <a href="#druzinovky">Družinovky</a>
+    <a href="#kalendar">Kalendár akcií</a>
+    <a href="#kontakty">Kontakty</a>
+  </nav>
+
+  <section id="druzinovky" aria-labelledby="druzinovky-title">
+    <div class="section-heading">
+      <h2 id="druzinovky-title">Družinovky</h2>
+      <label class="day-filter" hidden>
+        Deň stretnutia
+        <select id="meeting-day">
+          <option value="">Všetky dni</option>
+          {days.filter(day => meetingDays.has(day)).map(day => <option value={day}>{day}</option>)}
+          {meetingDays.has('dohoda') && <option value="dohoda">Bez pevného dňa</option>}
+        </select>
+      </label>
+    </div>
+    <ul class="cards" id="meeting-list">
+      {groups.map(group => (
+        <li class="card" data-day={dayFor(group.time)}>
+          <p class="category">{group.category}</p>
+          <h3>{group.name}</h3>
+          <p class="meeting-time">{group.time}</p>
+          <p class="leader"><span>Radca</span>{group.leader}</p>
+          {group.phone && <a href={phoneHref(group.phone)}>{group.phone}</a>}
+          {group.email && <a href={`mailto:${group.email}`}>{group.email}</a>}
+        </li>
+      ))}
+    </ul>
+    <p class="sr-only" role="status" id="meeting-status"></p>
+  </section>
+
+  <section id="kalendar" aria-labelledby="kalendar-title">
+    <h2 id="kalendar-title">Kalendár akcií</h2>
+    <div class="calendar">
+      {schedule.months.filter(month => month.events.length).map(month => (
+        <div class="month">
+          <h3>{month.name}</h3>
+          <ul>
+            {month.events.map(event => (
+              <li>
+                <p class="event-date">{event.date}</p>
+                <div>
+                  <h4>{event.name}</h4>
+                  {event.note && <p class="muted">{event.note}</p>}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+    {emptyMonths.length > 0 && <p class="muted mt-4">V rozpise zatiaľ nie sú uvedené akcie pre tieto mesiace: {emptyMonths.map(month => month.name.toLocaleLowerCase('sk')).join(', ')}.</p>}
+  </section>
+
+  <section id="kontakty" aria-labelledby="kontakty-title">
+    <h2 id="kontakty-title">Ďalšie kontakty</h2>
+    <ul class="cards">
+      {schedule.contacts.map(contact => (
+        <li class="card">
+          <p class="category">{contact.role}</p>
+          <h3>{contact.name}</h3>
+          <a href={phoneHref(contact.phone)}>{contact.phone}</a>
+          <a href={`mailto:${contact.email}`}>{contact.email}</a>
+        </li>
+      ))}
+    </ul>
+  </section>
+  <p class="source muted">Zdroj údajov · <a href={schedule.source}>Pôvodný rozpis v Google Sheets</a></p>
+</DirectPage>
+
+<script>
+  const select = document.querySelector<HTMLSelectElement>('#meeting-day');
+  const cards = document.querySelectorAll<HTMLElement>('#meeting-list [data-day]');
+  const status = document.querySelector<HTMLElement>('#meeting-status');
+
+  if (select && select.parentElement && status) {
+    const filterGroups = () => {
+      let visibleCount = 0;
+      for (const card of cards) {
+        card.hidden = Boolean(select.value) && card.dataset.day !== select.value;
+        if (!card.hidden) visibleCount++;
+      }
+      status.textContent = `Počet zobrazených družín: ${visibleCount}`;
+    };
+    select.addEventListener('change', filterGroups);
+    filterGroups();
+    select.parentElement.hidden = false;
+  }
+</script>
+
+<style>
+  .section-links { display: flex; flex-wrap: wrap; gap: 8px 12px; margin-top: 24px; }
+  .section-links a { padding: 7px 14px; border: 1px solid #7e8fab; border-radius: 8px; font-weight: 750; }
+  .section-links a:hover { background: #284374; }
+  section + section { margin-top: clamp(36px, 6vw, 68px); }
+  h2 { margin-bottom: 18px; }
+  .section-heading { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 0 20px; }
+  .day-filter:not([hidden]) { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; font-weight: 700; }
+  select { appearance: none; border: 1px solid #b2c0d4; border-radius: 8px; padding: 8px 34px 8px 12px; background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='10' viewBox='0 0 14 10'%3E%3Cpath d='m2 2 5 5 5-5' fill='none' stroke='%23192b55' stroke-width='2'/%3E%3C/svg%3E") no-repeat right 10px center; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 14px; }
+  .card { min-width: 0; border: 1px solid #dce4ee; border-top: 3px solid #1cb5d9; border-radius: 12px; background: #f4f7fa; padding: 18px; }
+  .category { color: #08758f; font-weight: 750; font-size: .875rem; }
+  .card h3 { font-size: 1.35rem; margin-block: 4px 7px; }
+  .meeting-time { font-weight: 800; }
+  .leader { padding-top: 9px; border-top: 1px solid #dce4ee; margin-top: 12px; }
+  .leader span { display: block; color: #58647b; font-size: .875rem; }
+  .card a, .source a { text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
+  .card a { display: block; width: fit-content; font-size: .9375rem; }
+  .calendar { border: 1px solid #dce4ee; border-radius: 12px; overflow: hidden; }
+  .month { display: grid; grid-template-columns: 140px minmax(0, 1fr); }
+  .month + .month { border-top: 1px solid #dce4ee; }
+  .month h3 { padding: 14px 18px; background: #f4f7fa; }
+  .month li { display: grid; grid-template-columns: 140px minmax(0, 1fr); align-items: baseline; gap: 4px 18px; padding: 14px 18px; }
+  .month li + li { border-top: 1px solid #e9edf3; }
+  .event-date { color: #08758f; font-weight: 750; }
+  h4 { font-weight: 800; }
+  .muted { color: #58647b; }
+  .source { margin-top: 30px; }
+  @media (max-width: 700px) { .month { grid-template-columns: 1fr; } }
+  @media (max-width: 520px) { .month li { grid-template-columns: 1fr; } }
+</style>

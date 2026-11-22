@@ -1,0 +1,183 @@
+{
+  "season": "2026/2027",
+  "source": "https://docs.google.com/spreadsheets/d/1zSNqdngSydI4aLB4tsB0d88wBW79tHY9TXWvRn8gOk0/edit?gid=0#gid=0",
+  "months": [
+    {
+      "name": "September",
+      "events": [
+        {
+          "name": "Otvorenie roka",
+          "date": "25-27.9.2026",
+          "note": "Spoločné otvorenie roka na zborovej chate"
+        }
+      ]
+    },
+    {
+      "name": "Október",
+      "events": [
+        {
+          "name": "Výlet 2. Oddielu",
+          "date": "3.10.2026",
+          "note": ""
+        },
+        {
+          "name": "Výlet 1. Oddielu",
+          "date": "11.10.2026",
+          "note": ""
+        },
+        {
+          "name": "JOTA-JOTI",
+          "date": "17.10.2026",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "November",
+      "events": [
+        {
+          "name": "Družinové akcie 2. Oddiel",
+          "date": "oktober - november",
+          "note": "Bližšie info u radcov jednotlivých družín."
+        },
+        {
+          "name": "Chlapčenská víkendovka",
+          "date": "13-15.11.2026",
+          "note": "Akcia len pre chlapcov, ktorý boli na tábore."
+        },
+        {
+          "name": "Skautská oddielová prespávačka",
+          "date": "27-29.11.2026",
+          "note": ""
+        }
+      ]
+    },
+    {
+      "name": "December",
+      "events": [
+        {
+          "name": "Vĺčiacka oddielová prespávačka",
+          "date": "5-6.12.2026",
+          "note": ""
+        },
+        {
+          "name": "Skautské vianoce",
+          "date": "20.12.2026",
+          "note": "Akcia pre celý zbor, rodičov aj priateľov skautingu"
+        }
+      ]
+    },
+    {
+      "name": "Január",
+      "events": []
+    },
+    {
+      "name": "Február",
+      "events": []
+    },
+    {
+      "name": "Marec",
+      "events": []
+    },
+    {
+      "name": "Apríl",
+      "events": []
+    },
+    {
+      "name": "Máj",
+      "events": []
+    },
+    {
+      "name": "Jún",
+      "events": []
+    },
+    {
+      "name": "Júl",
+      "events": []
+    }
+  ],
+  "groups": [
+    {
+      "name": "Škorpióny",
+      "category": "Staršie vĺčatá",
+      "time": "Utorok 15:30-17:00",
+      "leader": "Samuel Janeček",
+      "phone": "+421 951 386 816",
+      "email": "samuel.janecek@4zbor.sk"
+    },
+    {
+      "name": "Capybary",
+      "category": "Vĺčatá - chlapci",
+      "time": "Utorok 17:00-18:30",
+      "leader": "Filip Pulman (Strýko)",
+      "phone": "+421 918 277 708",
+      "email": "filip.pulman@4zbor.sk"
+    },
+    {
+      "name": "Pandy",
+      "category": "Vĺčatá",
+      "time": "Pondelok 16:00-17:30",
+      "leader": "Ella Kohlová",
+      "phone": "+421 950 887 650",
+      "email": "ella.kohlova@4zbor.sk"
+    },
+    {
+      "name": "Medvedíky",
+      "category": "Skautky",
+      "time": "Štvrtok 17:15-18:45",
+      "leader": "Timea Pulmanová (Koka)",
+      "phone": "+421 915 188 066",
+      "email": "timea.pulmanova@4zbor.sk"
+    },
+    {
+      "name": "Žraloci",
+      "category": "Skauti",
+      "time": "Streda 16:30-18:00",
+      "leader": "Rado Čigáš (Edo)",
+      "phone": "+421 944 455 292",
+      "email": "radoslav.cigas@4zbor.sk"
+    },
+    {
+      "name": "Líšky",
+      "category": "Skautky",
+      "time": "Pondelok 17:30-19:00",
+      "leader": "Michaela Molnárová",
+      "phone": "+421 902 059 455",
+      "email": "michalea.molnarova@4zbor.sk"
+    },
+    {
+      "name": "Kačky",
+      "category": "Rangeri a rangerky",
+      "time": "2x do mesiaca",
+      "leader": "Eliška",
+      "phone": "",
+      "email": ""
+    }
+  ],
+  "contacts": [
+    {
+      "name": "Ďalšie kontakty:",
+      "phone": "",
+      "email": "",
+      "role": ""
+    },
+    {
+      "name": "Pavol Marcinčin",
+      "phone": "+421 948 950 631",
+      "email": "pavol.marcincin@4zbor.sk",
+      "role": "Zborový vodca"
+    },
+    {
+      "name": "Adriána Čikotová",
+      "phone": "+421 910 186 658",
+      "email": "adriana.cikotova@4zbor.sk",
+      "role": "Zástupca zborového vodcu"
+    },
+    {
+      "name": "Eliška Zámborská",
+      "phone": "+421 905 238 418",
+      "email": "eliska.zamborska@4zbor.sk",
+      "role": "Vodkyňa oddielu skautov a skautiek"
+    }
+  ]
+}
