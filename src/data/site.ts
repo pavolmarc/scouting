@@ -36,6 +36,11 @@ export const site = {
     text: 'Cez hry, spoločné výzvy, priateľstvá a čas v prírode rozvíjame charakter, spoluprácu aj praktické zručnosti.',
     friendships: 'Deti vedieme k vytváraniu pevných priateľstiev mimo virtuálneho sveta, preto na akciách trávime veľa času v prírode a digitálne technológie používame len minimálne, pričom na tábore sú deti aj dlhší čas bez prístupu k elektronike.',
     values: ['Príroda', 'Priateľstvo', 'Zodpovednosť'],
+    troops: [
+      '1. oddiel Tajomná džungľa (vlčatá, 7–11 rokov)',
+      '2. oddiel Ambystoma (skauti, 11–15 rokov)',
+      '7. oddiel Thestrali (roveri a dospelí skauti)',
+    ],
   },
   stats: [
     { value: '2020', label: 'vznik skautingu na jazere' },
