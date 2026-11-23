@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import websupportBanner from '../assets/websupport-banner.png';
-import { site, socialLinks } from '../data/site';
+import { assetUrl, site, socialLinks } from '../data/site';
 import Icon from './Icon.astro';
 import SocialLinks from './SocialLinks.astro';
 ---
@@ -46,7 +46,7 @@ import SocialLinks from './SocialLinks.astro';
 
   <div class="container footer-bottom">
     <a href="#uvod">{site.name}</a>
-    <p>© {new Date().getFullYear()} {site.footer}</p>
+    <p>© <a class="footer-year" href={assetUrl('novacik/')} aria-label="Stránka pre nováčikov">{new Date().getFullYear()}</a> {site.footer}</p>
   </div>
 </footer>
 
@@ -153,8 +153,13 @@ import SocialLinks from './SocialLinks.astro';
     font-size: .875rem;
   }
 
-  .footer-bottom a {
+  .footer-bottom > a {
     font-weight: 800;
+  }
+
+  .footer-year:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
   }
 
   .footer-bottom p {
