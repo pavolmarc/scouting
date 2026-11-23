@@ -7,10 +7,13 @@ interface Props {
   title: string;
   description: string;
   label: string;
+  seoTitle?: string;
+  seoDescription?: string;
+  noindex?: boolean;
 }
-const { title, description, label } = Astro.props;
+const { title, description, label, seoTitle = title, seoDescription = description, noindex = true } = Astro.props;
 ---
-<Layout {title} {description} noindex>
+<Layout title={seoTitle} description={seoDescription} {noindex}>
   <header class="direct-header">
     <div class="container header-inner">
       <a class="brand" href={assetUrl('')} aria-label={`${site.name} – úvod`}>

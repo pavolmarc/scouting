@@ -13,7 +13,7 @@ export const site = {
   location: 'Košice – Nad jazerom',
   email: 'jazero.skauting@gmail.com',
   organization: 'Slovenský skauting o.z.',
-  description: 'Skauting v Košiciach – Nad jazerom. Od roku 2020 spájame deti a mladých ľudí cez dobrodružstvá, priateľstvá a život v prírode.',
+  description: 'Dzive labute sú skautský zbor pre deti a mládež v Košiciach – Nad jazerom. Spoznajte naše družinovky, výpravy a letné tábory a zistite, ako sa pridať.',
   navigation: [
     { label: 'O nás', href: '#o-nas' },
     { label: 'Naša činnosť', href: '#co-robime' },
