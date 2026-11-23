@@ -37,6 +37,7 @@ export const site = {
     friendships: 'Deti vedieme k vytváraniu pevných priateľstiev mimo virtuálneho sveta, preto na akciách trávime veľa času v prírode a digitálne technológie používame len minimálne, pričom na tábore sú deti aj dlhší čas bez prístupu k elektronike.',
     values: ['Príroda', 'Priateľstvo', 'Zodpovednosť'],
   },
+  showTroops: false,
   troops: [
     { number: 1, name: 'Tajomná džungľa', group: 'Vlčatá', age: '7–11 rokov' },
     { number: 2, name: 'Ambystoma', group: 'Skauti', age: '11–15 rokov' },
