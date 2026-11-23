@@ -1,14 +1,11 @@
 ---
 import DirectPage from '../layouts/DirectPage.astro';
+import Icon from '../components/Icon.astro';
 import schedule from '../data/schedule.json';
 
 const days = ['Pondelok', 'Utorok', 'Streda', 'Štvrtok', 'Piatok'];
 const dayFor = (time: string) => days.find(day => time.startsWith(`${day} `)) ?? 'dohoda';
 const meetingDays = new Set(schedule.groups.map(group => dayFor(group.time)));
-const groups = [...schedule.groups].sort((first, second) => {
-  const order = [...days, 'dohoda'];
-  return order.indexOf(dayFor(first.time)) - order.indexOf(dayFor(second.time));
-});
 const phoneHref = (phone: string) => `tel:${phone.replace(/\s/g, '')}`;
 const emptyMonths = schedule.months.filter(month => !month.events.length);
 ---
@@ -32,8 +29,8 @@ const emptyMonths = schedule.months.filter(month => !month.events.length);
       </label>
     </div>
     <ul class="cards" id="meeting-list">
-      {groups.map(group => (
-        <li class="card" data-day={dayFor(group.time)}>
+      {schedule.groups.map(group => (
+        <li class="card" data-day={dayFor(group.time)} style={`--group-color: ${group.color}`}>
           <p class="category">{group.category}</p>
           <h3>{group.name}</h3>
           <p class="meeting-time">{group.time}</p>
@@ -70,14 +67,18 @@ const emptyMonths = schedule.months.filter(month => !month.events.length);
   </section>
 
   <section id="kontakty" aria-labelledby="kontakty-title">
-    <h2 id="kontakty-title">Ďalšie kontakty</h2>
-    <ul class="cards">
+    <h2 id="kontakty-title">Kontakty na vedenie</h2>
+    <ul class="contact-list">
       {schedule.contacts.map(contact => (
-        <li class="card">
-          <p class="category">{contact.role}</p>
-          <h3>{contact.name}</h3>
-          <a href={phoneHref(contact.phone)}>{contact.phone}</a>
-          <a href={`mailto:${contact.email}`}>{contact.email}</a>
+        <li class="contact-row">
+          <div>
+            <h3>{contact.name}</h3>
+            <p class="muted">{contact.role}</p>
+          </div>
+          <div class="contact-links">
+            <a href={phoneHref(contact.phone)}><Icon name="phone" size={18} /><span>{contact.phone}</span></a>
+            <a href={`mailto:${contact.email}`}><Icon name="mail" size={18} /><span>{contact.email}</span></a>
+          </div>
         </li>
       ))}
     </ul>
@@ -115,8 +116,8 @@ const emptyMonths = schedule.months.filter(month => !month.events.length);
   .day-filter:not([hidden]) { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; font-weight: 700; }
   select { appearance: none; border: 1px solid #b2c0d4; border-radius: 8px; padding: 8px 34px 8px 12px; background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='10' viewBox='0 0 14 10'%3E%3Cpath d='m2 2 5 5 5-5' fill='none' stroke='%23192b55' stroke-width='2'/%3E%3C/svg%3E") no-repeat right 10px center; }
   .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 14px; }
-  .card { min-width: 0; border: 1px solid #dce4ee; border-top: 3px solid #1cb5d9; border-radius: 12px; background: #f4f7fa; padding: 18px; }
-  .category { color: #08758f; font-weight: 750; font-size: .875rem; }
+  .card { min-width: 0; border: 1px solid #dce4ee; border-top: 5px solid var(--group-color); border-radius: 12px; background: color-mix(in srgb, var(--group-color) 14%, white); padding: 18px; }
+  .category { color: #192b55; font-weight: 750; font-size: .875rem; }
   .card h3 { font-size: 1.35rem; margin-block: 4px 7px; }
   .meeting-time { font-weight: 800; }
   .leader { padding-top: 9px; border-top: 1px solid #dce4ee; margin-top: 12px; }
@@ -130,9 +131,17 @@ const emptyMonths = schedule.months.filter(month => !month.events.length);
   .month li { display: grid; grid-template-columns: 140px minmax(0, 1fr); align-items: baseline; gap: 4px 18px; padding: 14px 18px; }
   .month li + li { border-top: 1px solid #e9edf3; }
   .event-date { color: #08758f; font-weight: 750; }
+  .contact-list { border: 1px solid #dce4ee; border-radius: 12px; background: #fff; }
+  .contact-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); align-items: center; gap: 8px 24px; padding: 16px 20px; }
+  .contact-row + .contact-row { border-top: 1px solid #dce4ee; }
+  .contact-row h3 { font-size: 1.125rem; margin-bottom: 3px; }
+  .contact-links { display: flex; flex-wrap: wrap; gap: 0 20px; }
+  .contact-links a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; max-width: 100%; font-weight: 700; }
+  .contact-links a :global(svg) { flex-shrink: 0; color: #08758f; }
+  .contact-links span { min-width: 0; overflow-wrap: anywhere; text-decoration: underline; text-underline-offset: 3px; }
   h4 { font-weight: 800; }
   .muted { color: #58647b; }
   .source { margin-top: 30px; }
-  @media (max-width: 700px) { .month { grid-template-columns: 1fr; } }
+  @media (max-width: 700px) { .month, .contact-row { grid-template-columns: 1fr; } }
   @media (max-width: 520px) { .month li { grid-template-columns: 1fr; } }
 </style>

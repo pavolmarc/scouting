@@ -103,7 +103,8 @@
       "time": "Utorok 15:30-17:00",
       "leader": "Samuel Janeček",
       "phone": "+421 951 386 816",
-      "email": "samuel.janecek@4zbor.sk"
+      "email": "samuel.janecek@4zbor.sk",
+      "color": "#ffd966"
     },
     {
       "name": "Capybary",
@@ -111,7 +112,8 @@
       "time": "Utorok 17:00-18:30",
       "leader": "Filip Pulman (Strýko)",
       "phone": "+421 918 277 708",
-      "email": "filip.pulman@4zbor.sk"
+      "email": "filip.pulman@4zbor.sk",
+      "color": "#ffd966"
     },
     {
       "name": "Pandy",
@@ -119,7 +121,8 @@
       "time": "Pondelok 16:00-17:30",
       "leader": "Ella Kohlová",
       "phone": "+421 950 887 650",
-      "email": "ella.kohlova@4zbor.sk"
+      "email": "ella.kohlova@4zbor.sk",
+      "color": "#ffd966"
     },
     {
       "name": "Medvedíky",
@@ -127,7 +130,8 @@
       "time": "Štvrtok 17:15-18:45",
       "leader": "Timea Pulmanová (Koka)",
       "phone": "+421 915 188 066",
-      "email": "timea.pulmanova@4zbor.sk"
+      "email": "timea.pulmanova@4zbor.sk",
+      "color": "#93c47d"
     },
     {
       "name": "Žraloci",
@@ -135,7 +139,8 @@
       "time": "Streda 16:30-18:00",
       "leader": "Rado Čigáš (Edo)",
       "phone": "+421 944 455 292",
-      "email": "radoslav.cigas@4zbor.sk"
+      "email": "radoslav.cigas@4zbor.sk",
+      "color": "#93c47d"
     },
     {
       "name": "Líšky",
@@ -143,7 +148,8 @@
       "time": "Pondelok 17:30-19:00",
       "leader": "Michaela Molnárová",
       "phone": "+421 902 059 455",
-      "email": "michalea.molnarova@4zbor.sk"
+      "email": "michalea.molnarova@4zbor.sk",
+      "color": "#93c47d"
     },
     {
       "name": "Kačky",
@@ -151,16 +157,11 @@
       "time": "2x do mesiaca",
       "leader": "Eliška",
       "phone": "",
-      "email": ""
+      "email": "",
+      "color": "#8e7cc3"
     }
   ],
   "contacts": [
-    {
-      "name": "Ďalšie kontakty:",
-      "phone": "",
-      "email": "",
-      "role": ""
-    },
     {
       "name": "Pavol Marcinčin",
       "phone": "+421 948 950 631",
@@ -178,6 +179,12 @@
       "phone": "+421 905 238 418",
       "email": "eliska.zamborska@4zbor.sk",
       "role": "Vodkyňa oddielu skautov a skautiek"
+    },
+    {
+      "name": "Filip Pulman",
+      "phone": "+421 918 277 708",
+      "email": "filip.pulman@4zbor.sk",
+      "role": "Vedúci oddielu vĺčat"
     }
   ]
 }
