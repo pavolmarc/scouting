@@ -6,7 +6,7 @@ import Icon from './Icon.astro';
   <div class="container">
     <div class="about-grid">
       <div><p class="eyebrow">{site.about.label}</p><h2 id="about-title" class="whitespace-pre-line">{site.about.title}</h2></div>
-      <div class="about-copy"><p class="lead">{site.about.lead}</p><p class="body-copy">{site.about.text}</p><ul class="values flex flex-wrap gap-x-6 gap-y-3">{site.about.values.map(value => <li><Icon name="check" size={17}/>{value}</li>)}</ul></div>
+      <div class="about-copy"><p class="lead">{site.about.lead}</p><p class="body-copy">{site.about.text} {site.about.friendships}</p><ul class="values flex flex-wrap gap-x-6 gap-y-3">{site.about.values.map(value => <li><Icon name="check" size={17}/>{value}</li>)}</ul></div>
     </div>
     <div class="stats-grid">{site.stats.map(stat => <div class="stat"><strong>{stat.value}</strong><span>{stat.label}</span></div>)}</div>
   </div>

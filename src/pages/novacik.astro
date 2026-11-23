@@ -1,28 +1,23 @@
 ---
 import DirectPage from '../layouts/DirectPage.astro';
 import Icon from '../components/Icon.astro';
-import { assetUrl, site } from '../data/site';
+import { assetUrl, membershipIban } from '../data/site';
 ---
 <DirectPage
   title="Vitajte u Dzivých labutí"
-  description="Pridáva sa k nám vaše dieťa? Tu nájdete prihlášku, program skautského roka a informácie o poplatkoch."
+  description="Pre úspešnú registráciu je potrebné splniť tri kroky."
   label="Pre rodičov nováčikov"
 >
-  <a slot="actions" class="button button-yellow mt-6" href={assetUrl('prihlaska.pdf')} download="prihlaska.pdf">
-    Stiahnuť prihlášku (PDF)
-  </a>
-
-  <div class="onboarding">
-    <section aria-labelledby="prihlaska">
-      <h2 id="prihlaska">Ako vyplniť prihlášku</h2>
-      <p>Na prvej strane vyplňte údaje o dieťati a jeho zákonných zástupcoch. Na druhej strane označte, ktoré súhlasy udeľujete, doplňte dátum a podpíšte sa ako zákonný zástupca.</p>
-      <p>Na spôsobe odovzdania sa dohodnite s radcom, ktorý vedie družinu vášho dieťaťa. Ak kontakt ešte nemáte, napíšte nám.</p>
-    </section>
-
-    <section aria-labelledby="stretnutie">
-      <h2 id="stretnutie">Prvé družinové stretnutie</h2>
-      <p>Družiny sú menšie skupiny detí podľa veku. Termín a miesto prvého stretnutia si dohodnite s radcom družiny.</p>
-    </section>
+  <div slot="actions" class="registration">
+    <ol>
+      <li>Odovzdať prihlášku</li>
+      <li>Uhradiť registračný poplatok</li>
+      <li>Uhradiť členský poplatok</li>
+    </ol>
+    <p>Všetky podrobnosti nájdete nižšie.</p>
+    <a class="button button-yellow mt-6" href={assetUrl('prihlaska.pdf')} download="prihlaska.pdf">
+      Stiahnuť prihlášku (PDF)
+    </a>
   </div>
 
   <section class="parent-section" aria-labelledby="program">
@@ -30,18 +25,15 @@ import { assetUrl, site } from '../data/site';
     <div class="program-grid">
       <div class="info-card">
         <h3>V klubovni</h3>
-        <p>Stretnutia trvajú 1,5 až 2 hodiny. Družinovky sa momentálne konajú v priestoroch Pimpollo.</p>
-        <ul>
-          <li><strong>Raz týždenne družinovka.</strong> Stretnutie družiny pod vedením radcu. Deti sa učia neformálne, hrajú sa a plnia skautské odborky a výzvy.</li>
-          <li><strong>Raz mesačne oddielová rada.</strong> Stretnutie radcov družín a dospelých vodcov oddielov.</li>
-          <li><strong>Raz mesačne oddielovka.</strong> Spoločné stretnutie družín oddielu.</li>
-        </ul>
+        <p>Raz týždenne sa koná družinovka (stretnutie malej skupinky 6 až 8 členov) v priestoroch Pimpollo na Zajačej 30 v Košiciach. Stretnutie trvá 1,5 až 2 hodiny.</p>
+        <p>Deti sú podľa veku a pohlavia rozdelené do vĺčích a skautských družín. V stálej skupinke sa pod vedením radcu hrajú, skúšajú nové aktivity a postupne napredujú v skautských výzvach a odborkách.</p>
       </div>
       <div class="info-card">
         <h3>Výpravy a víkendové podujatia</h3>
         <ul>
-          <li>Raz mesačne jednodňová oddielová výprava do prírody</li>
-          <li>Víkendové chaty</li>
+          <li>Výlety a výpravy do prírody</li>
+          <li>Exkurzie</li>
+          <li>Chaty a prespávačky</li>
           <li>Špeciálne podujatia</li>
         </ul>
         <h3 class="camp-title">Tábor</h3>
@@ -51,7 +43,7 @@ import { assetUrl, site } from '../data/site';
   </section>
 
   <section class="parent-section info-card" aria-labelledby="kalendar">
-    <h2 id="kalendar">Kalendár akcií</h2>
+    <h2 id="kalendar" class="calendar-title"><Icon name="calendar" /> Kalendár akcií</h2>
     <p>V kalendári nájdete akcie na najbližšie mesiace. Pomôže vám zladiť skautské termíny s rodinnými aj ďalšími plánmi. Bližšie informácie pošleme najneskôr týždeň pred každou akciou.</p>
     <p>Prosíme, počítajte s týmito termínmi pri plánovaní. Keď sa na akciách stretneme v hojnom počte, program môže na seba nadväzovať a do ďalšieho tábora sa lepšie spoznáme.</p>
     <a class="button mt-5" href={assetUrl('rozpis/#kalendar')}>Otvoriť kalendár akcií</a>
@@ -76,12 +68,16 @@ import { assetUrl, site } from '../data/site';
         </ul>
         <dl class="payment">
           <dt>IBAN</dt>
-          <dd class="iban">SK12 8330 0000 0028 0204 1399</dd>
+          <dd class="iban">{membershipIban}</dd>
           <dt>Suma</dt>
           <dd>40 € za polrok</dd>
           <dt>Poznámka k platbe</dt>
           <dd>Členské - meno dieťaťa</dd>
         </dl>
+        <figure class="payment-qr">
+          <img src={assetUrl('platba-clenske.png')} width="164" height="164" alt="Platobný QR kód pre úhradu členského poplatku 40 €" loading="lazy" />
+          <figcaption>Naskenujte v bankovej aplikácii. Pred potvrdením platby doplňte do poznámky meno dieťaťa.</figcaption>
+        </figure>
       </section>
       <section class="info-card" aria-labelledby="registracny">
         <h3 id="registracny">Registračný poplatok</h3>
@@ -102,21 +98,23 @@ import { assetUrl, site } from '../data/site';
           <dt>Poznámka k platbe</dt>
           <dd>Registrácia rok - meno dieťaťa</dd>
         </dl>
+        <figure class="payment-qr">
+          <img src={assetUrl('platba-registracia.png')} width="164" height="164" alt="Platobný QR kód pre úhradu registračného poplatku 25 €" loading="lazy" />
+          <figcaption>Naskenujte v bankovej aplikácii. Pred potvrdením platby doplňte do poznámky rok a meno dieťaťa.</figcaption>
+        </figure>
       </section>
     </div>
-  </section>
-
-  <section class="contact-card" aria-labelledby="otazky">
-    <h2 id="otazky">Máte otázky?</h2>
-    <a href={`mailto:${site.email}`}><Icon name="mail" size={20} />{site.email}</a>
   </section>
 </DirectPage>
 
 <style>
-  .onboarding, .program-grid, .fee-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .onboarding { gap: clamp(24px, 5vw, 64px); }
+  .program-grid, .fee-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .registration { color: #dce5f5; }
+  .registration ol { list-style: decimal; padding-inline-start: 1.5rem; margin-block: 12px; }
+  .registration li + li { margin-top: 4px; }
+  .registration p { color: inherit; }
   .program-grid, .fee-grid { gap: 16px; }
-  .parent-section { margin-top: clamp(32px, 6vw, 60px); }
+  .parent-section + .parent-section { margin-top: clamp(32px, 6vw, 60px); }
   h2 { font-size: clamp(1.35rem, 3vw, 1.8rem); margin-bottom: 12px; }
   h3 { font-size: 1.25rem; margin-bottom: 8px; }
   h4 { font-weight: 800; margin-top: 16px; }
@@ -125,6 +123,10 @@ import { assetUrl, site } from '../data/site';
   .info-card { background: #f4f7fa; border: 1px solid #dce4ee; border-radius: 12px; padding: clamp(16px, 3vw, 26px); }
   .info-card ul { list-style: disc; padding-inline-start: 1.35rem; margin-top: 8px; }
   .info-card li + li { margin-top: 5px; }
+  .calendar-title { display: flex; align-items: center; gap: 10px; }
+  .payment-qr { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 12px; margin-top: 16px; }
+  .payment-qr img { width: min(34vw, 164px); height: auto; }
+  .payment-qr figcaption { color: #58647b; font-size: .875rem; }
   .camp-title, .fee-grid { margin-top: 16px; }
   .fee-grid .info-card { display: flex; flex-direction: column; }
   .fee-amount { margin-bottom: 12px; color: #192b55; }
@@ -136,7 +138,5 @@ import { assetUrl, site } from '../data/site';
   .payment dd + dt { margin-top: 8px; }
   .iban { font-variant-numeric: tabular-nums; }
   .inline-link { text-decoration: underline; text-underline-offset: 3px; }
-  .contact-card { background: #f4f7fa; border: 1px solid #dce4ee; border-radius: 12px; margin-top: 32px; padding: 22px; }
-  .contact-card a { display: inline-flex; align-items: center; gap: 8px; font-weight: 750; text-decoration: underline; overflow-wrap: anywhere; }
-  @media (max-width: 700px) { .onboarding, .program-grid, .fee-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 700px) { .program-grid, .fee-grid { grid-template-columns: 1fr; } }
 </style>

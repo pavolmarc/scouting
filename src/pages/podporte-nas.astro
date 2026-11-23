@@ -1,0 +1,75 @@
+---
+import { Image } from 'astro:assets';
+import banner from '../assets/support/skauti-na-luke.webp';
+import DirectPage from '../layouts/DirectPage.astro';
+import { membershipIban, site } from '../data/site';
+
+const donations = [
+  {
+    id: 'jednorazovy-dar',
+    title: 'Jednorazový dar',
+    description: 'Dar nám pomôže s fungovaním zboru a s nákupom skautskej a táborovej výbavy či materiálu na aktivity.',
+    paymentNote: 'Jednorazový dar',
+  },
+  {
+    id: 'pravidelna-podpora',
+    title: 'Pravidelná podpora',
+    description: 'Pravidelná podpora nám pomôže dlhodobo organizovať akcie a pokrývať bežné náklady zboru.',
+    paymentNote: 'Pravidelný dar',
+  },
+];
+---
+
+<DirectPage title="Podporte nás" description="Budeme veľmi radi, ak sa nás rozhodnete podporiť aj finančne." label={site.name}>
+  <Image
+    slot="hero-media"
+    class="support-banner"
+    src={banner}
+    alt="Usmiati skauti so šatkami na lúke pred horami."
+    widths={[480, 800, 1200, 1600]}
+    sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1180px) 60vw, 680px"
+    loading="eager"
+    fetchpriority="high"
+  />
+  <div class="support-grid">
+    {donations.map(donation => (
+      <section class="support-card" aria-labelledby={donation.id}>
+        <h2 id={donation.id}>{donation.title}</h2>
+        <p>{donation.description}</p>
+        <dl class="payment">
+          <dt>IBAN</dt>
+          <dd class="iban">{membershipIban}</dd>
+          <dt>Suma</dt>
+          <dd>Podľa vlastného výberu</dd>
+          <dt>Poznámka k platbe</dt>
+          <dd>{donation.paymentNote}</dd>
+        </dl>
+      </section>
+    ))}
+
+    <section class="support-card" aria-labelledby="dve-percenta">
+      <h2 id="dve-percenta">2 % z dane</h2>
+      <p>V roku 2027 nás budete môcť podporiť poukázaním 2 % z dane.</p>
+    </section>
+  </div>
+</DirectPage>
+
+<style>
+  .support-banner { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; object-position: center 42%; border-radius: 12px; }
+  @media (max-width: 767px) { .support-banner { aspect-ratio: 3 / 2; } }
+  .support-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .support-card { display: flex; flex-direction: column; background: #f4f7fa; border: 1px solid #dce4ee; border-radius: 12px; padding: clamp(16px, 3vw, 26px); }
+  h2 { font-size: 1.35rem; margin-bottom: 10px; }
+  p { color: #58647b; }
+  .payment { margin-top: auto; padding-top: 18px; }
+  .payment dt { color: #58647b; font-size: .875rem; font-weight: 750; }
+  .payment dt:first-child { border-top: 1px solid #dce4ee; padding-top: 12px; }
+  .payment dd { font-weight: 750; }
+  .payment dd + dt { margin-top: 8px; }
+  .iban { font-variant-numeric: tabular-nums; }
+  @media (max-width: 900px) {
+    .support-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .support-card:last-child { grid-column: 1 / -1; }
+  }
+  @media (max-width: 580px) { .support-grid { grid-template-columns: 1fr; } }
+</style>

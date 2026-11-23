@@ -7,7 +7,6 @@ const days = ['Pondelok', 'Utorok', 'Streda', 'Štvrtok', 'Piatok'];
 const dayFor = (time: string) => days.find(day => time.startsWith(`${day} `)) ?? 'dohoda';
 const meetingDays = new Set(schedule.groups.map(group => dayFor(group.time)));
 const phoneHref = (phone: string) => `tel:${phone.replace(/\s/g, '')}`;
-const emptyMonths = schedule.months.filter(month => !month.events.length);
 ---
 <DirectPage title="Rozpis a kalendár" description="Termíny družinoviek, plánované akcie a kontakty na vedenie zboru." label={`Skautský rok ${schedule.season}`}>
   <nav slot="actions" class="section-links" aria-label="Na tejto stránke">
@@ -63,7 +62,6 @@ const emptyMonths = schedule.months.filter(month => !month.events.length);
         </div>
       ))}
     </div>
-    {emptyMonths.length > 0 && <p class="muted mt-4">V rozpise zatiaľ nie sú uvedené akcie pre tieto mesiace: {emptyMonths.map(month => month.name.toLocaleLowerCase('sk')).join(', ')}.</p>}
   </section>
 
   <section id="kontakty" aria-labelledby="kontakty-title">
@@ -83,7 +81,6 @@ const emptyMonths = schedule.months.filter(month => !month.events.length);
       ))}
     </ul>
   </section>
-  <p class="source muted">Zdroj údajov · <a href={schedule.source}>Pôvodný rozpis v Google Sheets</a></p>
 </DirectPage>
 
 <script>
@@ -122,7 +119,7 @@ const emptyMonths = schedule.months.filter(month => !month.events.length);
   .meeting-time { font-weight: 800; }
   .leader { padding-top: 9px; border-top: 1px solid #dce4ee; margin-top: 12px; }
   .leader span { display: block; color: #58647b; font-size: .875rem; }
-  .card a, .source a { text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
+  .card a { text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
   .card a { display: block; width: fit-content; font-size: .9375rem; }
   .calendar { border: 1px solid #dce4ee; border-radius: 12px; overflow: hidden; }
   .month { display: grid; grid-template-columns: 140px minmax(0, 1fr); }
@@ -141,7 +138,6 @@ const emptyMonths = schedule.months.filter(month => !month.events.length);
   .contact-links span { min-width: 0; overflow-wrap: anywhere; text-decoration: underline; text-underline-offset: 3px; }
   h4 { font-weight: 800; }
   .muted { color: #58647b; }
-  .source { margin-top: 30px; }
   @media (max-width: 700px) { .month, .contact-row { grid-template-columns: 1fr; } }
   @media (max-width: 520px) { .month li { grid-template-columns: 1fr; } }
 </style>

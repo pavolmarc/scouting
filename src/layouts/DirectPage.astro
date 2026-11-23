@@ -17,16 +17,19 @@ const { title, description, label } = Astro.props;
         <img src={badge} width="47" height="47" alt="" />
         <span><strong>{site.shortName}</strong><small>4. zbor · Slovenský skauting</small></span>
       </a>
-      <a class="text-link" href={assetUrl('')}>Na úvod</a>
+      <a class="text-link" href={assetUrl('')}>Domov</a>
     </div>
   </header>
   <main id="obsah">
     <div class="direct-hero">
-      <div class="container">
-        <p class="eyebrow">{label}</p>
-        <h1>{title}</h1>
-        <p class="intro">{description}</p>
-        <slot name="actions" />
+      <div class:list={['container', { 'hero-with-media': Astro.slots.has('hero-media') }]}>
+        <div>
+          <p class="eyebrow">{label}</p>
+          <h1>{title}</h1>
+          <p class="intro">{description}</p>
+          <slot name="actions" />
+        </div>
+        <slot name="hero-media" />
       </div>
     </div>
     <div class="container direct-content">
@@ -39,6 +42,8 @@ const { title, description, label } = Astro.props;
   .direct-header { border-bottom: 1px solid #e9edf3; background: white; }
   .header-inner { height: 72px; gap: 12px; }
   .direct-hero { padding-block: clamp(40px, 7vw, 76px); background: #192b55; color: white; }
+  .hero-with-media { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 6fr); align-items: center; gap: clamp(20px, 5vw, 64px); }
+  @media (max-width: 767px) { .hero-with-media { grid-template-columns: 1fr; } }
   .eyebrow { color: #6bd4ed; font-size: .875rem; margin-bottom: 12px; }
   h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); margin-bottom: 16px; }
   .intro { color: #dce5f5; max-width: 62ch; font-size: 1.125rem; }

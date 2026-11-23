@@ -99,7 +99,7 @@
   "groups": [
     {
       "name": "Škorpióny",
-      "category": "Staršie vĺčatá",
+      "category": "Vĺčatá – chlapci",
       "time": "Utorok 15:30-17:00",
       "leader": "Samuel Janeček",
       "phone": "+421 951 386 816",
@@ -117,7 +117,7 @@
     },
     {
       "name": "Pandy",
-      "category": "Vĺčatá",
+      "category": "Vĺčatá – miešaná",
       "time": "Pondelok 16:00-17:30",
       "leader": "Ella Kohlová",
       "phone": "+421 950 887 650",
@@ -150,15 +150,6 @@
       "phone": "+421 902 059 455",
       "email": "michalea.molnarova@4zbor.sk",
       "color": "#93c47d"
-    },
-    {
-      "name": "Kačky",
-      "category": "Rangeri a rangerky",
-      "time": "2x do mesiaca",
-      "leader": "Eliška",
-      "phone": "",
-      "email": "",
-      "color": "#8e7cc3"
     }
   ],
   "contacts": [

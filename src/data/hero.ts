@@ -1,16 +1,16 @@
 import backdrop from '../assets/hero/pozadie-domovenky.webp';
-import group from '../assets/hero/spolocna-fotografia.webp';
-import game from '../assets/hero/aktivita-2.webp';
+import runners from '../assets/hero/beh-na-luke.webp';
 import scouts from '../assets/hero/aktivita-3.webp';
+import mountains from '../assets/hero/oddych-v-horach.webp';
 import torches from '../assets/hero/aktivita-4.webp';
-import campfire from '../assets/hero/aktivita-5.webp';
+import guitar from '../assets/hero/gitara-pri-stane.webp';
 
 export const heroBackdrop = backdrop;
 
 export const heroPhotos = [
-  { src: group, alt: 'Spoločná fotografia detí a dospelých pred dreveným prístreškom v prírode.' },
-  { src: game, alt: 'Spoločná pohybová hra na lúke pri lese.' },
+  { src: runners, alt: 'Deti bežia po lúke počas skautskej hry.' },
   { src: scouts, alt: 'Dvaja skauti v rovnošatách pred táborovým stanom.' },
+  { src: mountains, alt: 'Skupina oddychuje v tráve s výhľadom na hory.' },
   { src: torches, alt: 'Skauti nesú horiace fakle cez táborovú lúku.' },
-  { src: campfire, alt: 'Skauti stoja v kruhu okolo táborového ohňa.' },
+  { src: guitar, alt: 'Skauti sedia pred stanom a jeden z nich hrá na gitare.' },
 ];

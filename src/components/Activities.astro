@@ -7,15 +7,17 @@ import { site } from '../data/site';
   <div class="activity-grid">
     {site.activities.items.map((item) => (
       <article class="activity-card">
-        <Image
-          class="activity-photo"
-          src={item.photo}
-          alt={item.alt}
-          widths={[320, 640, 960]}
-          sizes="(max-width: 420px) calc(100vw - 94px), (max-width: 767px) calc(50vw - 69px), (max-width: 1050px) calc(50vw - 92px), 240px"
-          loading="lazy"
-          decoding="async"
-        />
+        <div class:list={['activity-photo-frame', { 'activity-photo-zoom': item.zoomPhoto }]}>
+          <Image
+            class="activity-photo"
+            src={item.photo}
+            alt={item.alt}
+            widths={[320, 640, 960]}
+            sizes="(max-width: 420px) calc(100vw - 94px), (max-width: 767px) calc(50vw - 69px), (max-width: 1050px) calc(50vw - 92px), 240px"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
         <h3>{item.title}</h3>
         <p class="activity-tag">{item.tag}</p>
         <p class="body-copy">{item.text}</p>
