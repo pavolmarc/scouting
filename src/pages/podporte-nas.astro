@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import banner from '../assets/support/skauti-na-luke.webp';
+import Header from '../components/Header.astro';
 import DirectPage from '../layouts/DirectPage.astro';
 import { assetUrl, membershipIban, site } from '../data/site';
 
@@ -28,6 +29,7 @@ const donations = [
   label={site.name}
   noindex={false}
 >
+  <Header slot="header" onHomepage={false} />
   <Image
     slot="hero-media"
     class="support-banner"

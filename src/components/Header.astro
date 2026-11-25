@@ -1,20 +1,28 @@
 ---
 import badge from '../assets/domovenka.svg?url';
-import { site } from '../data/site';
+import { assetUrl, site } from '../data/site';
+
+interface Props {
+  onHomepage?: boolean;
+}
+
+const { onHomepage = true } = Astro.props;
+const navigationHref = (href: string) => !onHomepage && href.startsWith('#') ? assetUrl(href) : href;
+const joinHref = navigationHref('#pridaj-sa');
 ---
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href="#uvod" aria-label={`${site.name} – úvod`}>
+    <a class="brand" href={navigationHref('#uvod')} aria-label={`${site.name} – úvod`}>
       <img src={badge} width={47} height={47} alt="" />
       <span><strong>{site.shortName}</strong><small>4. zbor · Slovenský skauting</small></span>
     </a>
     <nav class="desktop-nav" aria-label="Hlavná navigácia">
-      {site.navigation.map(item => <a href={item.href}>{item.label}</a>)}
+      {site.navigation.map(item => <a href={navigationHref(item.href)}>{item.label}</a>)}
     </nav>
-    <a class="button button-small header-cta" href="#pridaj-sa">{site.hero.action}</a>
+    <a class="button button-small header-cta" href={joinHref}>{site.hero.action}</a>
     <details class="mobile-menu">
       <summary aria-label="Otvoriť navigáciu"><span>Menu</span><span class="menu-lines" aria-hidden="true"></span></summary>
-      <nav aria-label="Mobilná navigácia">{site.navigation.map(item => <a href={item.href}>{item.label}</a>)}<a href="#pridaj-sa">{site.hero.action}</a></nav>
+      <nav aria-label="Mobilná navigácia">{site.navigation.map(item => <a href={navigationHref(item.href)}>{item.label}</a>)}<a href={joinHref}>{site.hero.action}</a></nav>
     </details>
   </div>
 </header>
